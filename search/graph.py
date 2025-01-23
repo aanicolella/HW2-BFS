@@ -1,8 +1,6 @@
 import networkx as nx
-#from networkx.drawing.nx_pydot import graphviz_layout
 import matplotlib.pyplot as plt
 from collections import deque
-#import queue
 
 class Graph:
     """
@@ -68,8 +66,6 @@ class Graph:
                 Q.append(neighbor)
         # if no end node, return path
             # check for case that end node/path does not exist
-        if not end:
-            return path
-        else:
+        if end:
             return None
-
+        return path
