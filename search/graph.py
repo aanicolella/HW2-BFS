@@ -12,7 +12,19 @@ class Graph:
         """
         Initialization of graph object 
         """
-        self.graph = nx.read_adjlist(filename, create_using=nx.DiGraph, delimiter=";")         
+        self.graph = nx.read_adjlist(filename, create_using=nx.DiGraph, delimiter=";")     
+
+    def checkValidGraph(self, start, end=None):
+        try:
+            self.graph[start]
+        except KeyError:
+            raise KeyError('Invalid input--selected start node does not exist')
+        if end:
+            try:
+                self.graph[end]
+            except KeyError:
+                raise KeyError('Invalid input--selected end node does not exist')
+
 
     def bfs(self, start, end=None):
         """
@@ -32,9 +44,11 @@ class Graph:
         Output:
             * path: 
                 * if end not provided: list of nodes in order of traversal
-                * if end provided: list of node path to reach end node from start node
+                * if end provided: list of node path to reach end node from start node (or None if no path)
         '''
-    # code for BFS 
+        # check if start/end exist
+        self.checkValidGraph(start,end)
+
         # Initialize queue and add start node
         Q = deque([start])
         # initialize visited nodes and path tracking
@@ -59,13 +73,20 @@ class Graph:
                 # check if end defined, if so add to end_track and check if == end
                 if end and neighbor not in visited:
                     end_track[neighbor] = v
-                    # if reach end, get path from end_track values and reverse to return ordered search path
+                    # if reach end, extract path from end_track values and reverse to return ordered search path
                     if neighbor == end:
-                        return list(end_track.keys())
+                        get_path = [end]
+                        curr_node = end
+                        while curr_node != start:
+                            curr_node = end_track[curr_node]
+                            get_path.append(curr_node)
+                        get_path.reverse()
+                        return get_path
+                        
                 # add neighbor to queue
                 Q.append(neighbor)
-        # if no end node, return path
-            # check for case that end node/path does not exist
+        # if end node not reached, return none
         if end:
             return None
+        # if no end node, return path
         return path
