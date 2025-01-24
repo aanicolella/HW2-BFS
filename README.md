@@ -1,3 +1,3 @@
-![BuildStatus](https://github.com/aanicolella/HW2-BFS/workflows/HW2-BFS/badge.svg?event=push)
+![BuildStatus](https://github.com/aanicolella/HW2-BFS/actions/workflows/test.yml/badge.svg?event=push)
 # Assignment 2
 Breadth-first search (BFS) is a core graph and tree traversal algorithm. As the name implies, BFS explores nodes broadly, covering one layer at a time, in order of their distance from the start node. BFS is able to explore nodes in this manner by employing the queue data structure, which allows for easy retreival of nodes in a first in, first out order. BFS may be used for full graph traversal (finding a path that visits all nodes in a connected graph) or to find more specific (i.e. shortest) path between defined nodes. There are many real world applications of BFS such as pathfinding for navigation.
